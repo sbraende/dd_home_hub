@@ -3,8 +3,8 @@ from dash import Dash, html, dash_table, dcc
 import pandas as pd
 import plotly.express as px
 
-connection = sqlite3.Connection('ht.db')
-df = pd.read_sql('SELECT * FROM ht_table', connection)
+connection = sqlite3.Connection('humidtemp.db')
+df = pd.read_sql('SELECT * FROM humidtemp_table', connection)
 
 app = Dash(__name__)
 
