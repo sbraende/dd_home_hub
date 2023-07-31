@@ -2,7 +2,7 @@ import requests
 import simplejson # Remove later
 
 base_url = "http://api.openweathermap.org/data/2.5/weather?"
-api_key = open("api_key", "r").read()
+api_key = open("api_key.txt", "r").read()
 
 city = "Fornebu"
 

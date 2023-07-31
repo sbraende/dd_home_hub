@@ -1,2 +1,13 @@
-/api_key
+# Software user prefs
+/.idea/
+/.vscode/
+
+# Python bytecode cache
+__pycache__/
+*.pyc
+*.pyo
+
+# User data
+/api_key.txt
+/raspberry_ip.txt
 /humidtemp.db
