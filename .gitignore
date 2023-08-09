@@ -8,6 +8,4 @@ __pycache__/
 *.pyo
 
 # User data
-/api_key.txt
-/raspberry_ip.txt
-/humidtemp.db
+raspberry_ip.txt

@@ -1,8 +1,10 @@
 # Hub for showing temperature and humidity data
 
-Requires:
-- requests python library
+## Requires:
+- Dash
+- Pandas
+- Plotly.express 
 
 Install: 
-- Create openWeather account type your api key into a api_key.txt file. 
-- Create a raspberry_ip.txt documents and type in your ip address. 
+- Make sure dd_home_server is running
+- Open config.py. Type the ip-address for your Raspberry Pi with dd_home_server main running.
