@@ -1,0 +1,11 @@
+{
+    "ip": "0.0.0.0",
+    "host": 8050, 
+    "raspberry_ip": {
+        "raspberry01": "101.101.10.101:5000",
+        "raspberry02": "101.101.10.102:5000"
+    },
+    "exterior_weather": true,
+    "openweather_apikey": "",
+    "oslo": "Fornebu"
+}
