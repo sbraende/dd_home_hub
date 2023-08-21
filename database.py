@@ -27,10 +27,7 @@ class Config():
         return bool(self.cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}'").fetchone())
 
 
-class ReadWriteData():
-    def __init__(self):         ### Do I need this?? 
-        self.test = "test"      ### Do I need this??    
-
+class ReadWriteData(): 
     def get_interior_climate(self):
         data = {
             "room": "roomname",  # Get data from interior climate
@@ -49,5 +46,5 @@ class ReadWriteData():
 
 my_db = Config("climate")
 data_handler = ReadWriteData()
-my_db.make_table("livingroom", data_handler.get_interior_climate())
+# my_db.make_table("livingroom", data_handler.get_interior_climate())
 data_handler.write_data(data_handler.get_interior_climate(), "livingroom", my_db.cursor)
