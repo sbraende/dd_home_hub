@@ -1,5 +1,4 @@
 import sqlite3
-from datetime import datetime
 from pathlib import Path
 
 
@@ -20,11 +19,7 @@ class Config():
     
     def make_table(self, table_name: str, columns: dict):
         columns_formatted = ", ".join(columns.keys())
-        self.cursor.execute(f"CREATE TABLE {table_name} ({columns_formatted})")
-        print(f"Table {table_name} created")
-
-    def check_table(self, table_name: str):
-        return bool(self.cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}'").fetchone())
+        self.cursor.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_formatted})")
 
 
 class ReadWriteData(): 
@@ -46,5 +41,7 @@ class ReadWriteData():
 
 my_db = Config("climate")
 data_handler = ReadWriteData()
-# my_db.make_table("livingroom", data_handler.get_interior_climate())
+my_db.make_table("livingroom", data_handler.get_interior_climate())
 data_handler.write_data(data_handler.get_interior_climate(), "livingroom", my_db.cursor)
+my_db.connection.commit()  # Don't forget to commit changes
+my_db.connection.close()   # Don't forget to close the connection
