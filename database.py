@@ -1,5 +1,6 @@
 import sqlite3
 from pathlib import Path
+import exterior_climate
 
 
 class Config():
@@ -37,13 +38,18 @@ class ReadWriteData():
         data_values = list(data.values())
 
         cursor.execute(f"INSERT INTO {table_name} ({data_columns}) VALUES ({data_points})", data_values)
-        cursor.commit()
-        cursor.close()
 
 
 my_db = Config("climate")
 data_handler = ReadWriteData()
-my_db.make_table("livingroom", data_handler.get_interior_climate())
-data_handler.write_data(data_handler.get_interior_climate(), "livingroom", my_db.cursor)
+ext_weather = exterior_climate.OpenWeather("config.json")
+
+my_db.make_table("exterior_weather", ext_weather.get_weather())
+data_handler.write_data(ext_weather.get_weather(), "exterior_weather", my_db.cursor)
+
 my_db.connection.commit()  # Don't forget to commit changes
 my_db.connection.close()   # Don't forget to close the connection
+
+
+# my_db.make_table("livingroom", data_handler.get_interior_climate())
+# data_handler.write_data(data_handler.get_interior_climate(), "livingroom", my_db.cursor)
