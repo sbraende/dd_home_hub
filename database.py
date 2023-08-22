@@ -24,19 +24,10 @@ class Config():
 
 
 class ReadWriteData(): 
-    def get_interior_climate(self):
-        data = {
-            "room": "roomname",  # Get data from interior climate
-            "humidity": "55",     # Get data from interior climate
-            "temperature": "24"   # Get data from interior climate
-        }
-        return data
-
     def write_data(self, data: dict, table_name: str, cursor: object):
         data_columns = ", ".join(data.keys())
         data_points = ", ".join(["?" for _ in data])
         data_values = list(data.values())
-
         cursor.execute(f"INSERT INTO {table_name} ({data_columns}) VALUES ({data_points})", data_values)
 
 
