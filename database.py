@@ -37,6 +37,8 @@ class ReadWriteData():
         data_values = list(data.values())
 
         cursor.execute(f"INSERT INTO {table_name} ({data_columns}) VALUES ({data_points})", data_values)
+        cursor.commit()
+        cursor.close()
 
 
 my_db = Config("climate")

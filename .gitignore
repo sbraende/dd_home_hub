@@ -9,4 +9,4 @@ __pycache__/
 
 # User data
 config.json
-humidtemp.db
+climate.db
