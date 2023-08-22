@@ -1,35 +1,60 @@
 import json
+import requests
 
 
-class Configuration():
-    def __init__(self, config_path):
+class Config():
+    def __init__(self, config_path: str):
+        config = self.open_config(config_path)
+
+        raspberry_instances = []
+        
+        for raspberry_name, address_port in config.get("interior_climate", {}), config.get("dd_home_server_api", {}).items():
+            address = f"http://{address_port}/data"
+            raspberry_instance = Raspberry(address)
+            raspberry_instances.append(raspberry_instance)
+
+        for raspberry_instance in raspberry_instances:
+            print(raspberry_instance.address)
+
+
+    def open_config(self, config_path: str) -> dict:
         try:
             with open(config_path) as config_file:
-                self.config = json.load(config_file)
+                config = json.load(config_file)
         except json.JSONDecodeError as error:
             print(f"Error getting json file: {error}")
         except FileNotFoundError:
             print(f"Config file not found at {config_path}")
-
-    def find_raspberry(self):
-        raspberrys = self.config["raspberry_ip"]
-        for raspberry in raspberrys:
-            data = raspberrys[raspberry]
+        return config
 
 
-class Data():
-    def get_data(self, ip_port):
-        # For each ip, get data. Log to object???? 
+class Raspberry():
+    def __init__(self, address) -> object:
+        # self.name = name
+        self.address = address
 
-        
-        except sqlite3.Error as error:
-            print(f"Error while initializing the database: {error}")
-    
-
-my_config = Configuration("config.json")
+        # self.url = str
+        # self.data = list
 
 
-print(my_config.get_data())
+my_config = Config("config.json")
 
-# Class. Config. Per Rasppi, create objects. 
-# Get data call
+
+
+
+    # def get_data(self) -> object:
+    #     for call in self.api_urls:
+    #         response = requests.get(data)
+    #         if response.status_code == 200:
+    #             data = response.json()
+    #             return data
+    #         else:
+    #             print("Failed to retrieve data from API.")
+
+
+        # raspberry_dict = self.config["interior_climate"]["dd_home_server_api"]
+        # api_urls = []
+        # for raspberry_name, address_port in raspberry_dict.items():
+        #     api_url = f"http://{address_port}/data"
+        #     api_urls.append(api_url)
+        # return api_urls

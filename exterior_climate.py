@@ -7,7 +7,7 @@ class OpenWeather():
         self.config = self.open_config(config_path)
         self.url = self.make_url(config_path)
 
-    def open_config(self, config_path: str):
+    def open_config(self, config_path: str) -> dict:
         try:
             with open(config_path) as config_file:
                 config = json.load(config_file)
@@ -42,7 +42,3 @@ class Conversion():
     def kelvin_to_celsius(kelvin):
         celsius = kelvin - 273.15
         return celsius
-
-
-# exterior_weather = OpenWeather("config.json")
-# print(exterior_weather.get_weather())
