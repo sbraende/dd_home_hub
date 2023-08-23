@@ -1,8 +1,9 @@
 import sqlite3
+from datetime import datetime
 from pathlib import Path
 
 
-class Config():
+class Main():
     def __init__(self, db_name: str):
         self.name = db_name
         self.filename = f"{self.name}.db"
@@ -21,10 +22,11 @@ class Config():
         columns_names = ", ".join(data.keys())
         self.cursor.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_names})")
 
-
-class ReadWriteData(): 
-    def write_data(self, data: dict, table_name: str, cursor: object):
-        data_columns = ", ".join(data.keys())
+    def write_data(self, table_name: str, data: dict):
+        columns_names = ", ".join(data.keys())
+        # Make table here? 
         data_points = ", ".join(["?" for _ in data])
         data_values = list(data.values())
-        cursor.execute(f"INSERT INTO {table_name} ({data_columns}) VALUES ({data_points})", data_values)
+        self.cursor.execute(f"INSERT INTO {table_name} ({columns_names}) VALUES ({data_points})", data_values)
+        self.connection.commit()
+        self.connection.close()

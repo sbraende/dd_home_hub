@@ -5,6 +5,7 @@ import utilities
 class Config():
     def __init__(self):
         self.config = utilities.HelperFunctions.open_config("config.json")
+        self.table_names = ["raspberry01", "raspberry02"]  ## For each raspbeery get raspberry name
 
     def get_interior_climate(self):
         for raspberry in self.get_raspberrys():
