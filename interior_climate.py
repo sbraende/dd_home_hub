@@ -34,3 +34,5 @@ class Raspberry():
         self.name = name
         self.address_port = address_port
         self.url = f"http://{address_port}/data"
+
+        
