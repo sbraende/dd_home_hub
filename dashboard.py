@@ -1,8 +1,8 @@
 from dash import Dash, html
 
 
-class main():
-    def __init__(self) -> None:
+class Webpage():
+    def __init__(self, host, port) -> None:
         app = Dash(__name__)
 
         app.layout = html.Div(
@@ -14,6 +14,7 @@ class main():
         app.run(host='0.0.0.0', port=8050, debug=True)
 
 
+Webpage()
 
 
 # import requests
@@ -21,9 +22,6 @@ class main():
 # import pandas as pd
 # import plotly.express as px
 # import config
-
-# app.layout = html.Div([
-#     # html.Div(children="Temperature data"),
 
 #     # Compare temperature
 #     dcc.Graph(figure=px.line(df, x="datetime",
