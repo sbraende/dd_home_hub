@@ -7,7 +7,7 @@ class OpenWeather():
     def __init__(self):
         self.config = utilities.HelperFunctions.open_config("config.json")
         self.url = self.make_url()
-        self.table_names = ["exterior_climate"]
+        self.table_name = "exterior_climate"
 
     def make_url(self):
         openweather_url = "http://api.openweathermap.org/data/2.5/weather?"
