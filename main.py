@@ -15,12 +15,11 @@ class Database():
         self.climate_database.make_table(self.exterior_instance.table_names[0],
                                          self.exterior_instance.get_weather())
 
-    def log_data(self):
+    def write_data(self):
     #     self.climate_database.write_data("interior_climate", 
     #                                      self.exterior_instance.get_weather())
         self.climate_database.write_data(self.exterior_instance.table_names[0],  # Name of table
                                          self.exterior_instance.get_weather())
-        
 
     def run(self):
         pass
@@ -28,5 +27,4 @@ class Database():
 
 if __name__ == '__main__':
     main_database = Database()
-    main_database.log_data()
-
+    main_database.write_data()

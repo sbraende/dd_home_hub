@@ -24,7 +24,6 @@ class Main():
 
     def write_data(self, table_name: str, data: dict):
         columns_names = ", ".join(data.keys())
-        # Make table here? 
         data_points = ", ".join(["?" for _ in data])
         data_values = list(data.values())
         self.cursor.execute(f"INSERT INTO {table_name} ({columns_names}) VALUES ({data_points})", data_values)
