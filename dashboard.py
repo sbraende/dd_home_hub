@@ -1,33 +1,42 @@
 import pandas
 from dash import Dash, html
-from database import MainDatabase 
+# from database import MainDatabase
 
-def get_data():
-    tmp = MainDatabase("climate")
-    tables = tmp.get_db_tables()
-    dataframes = {}
+print("hey sebby seb")
 
-    for table in tables:
-        table_name = table[0]
-        quary = f"SELECT * from {table_name}"
-        # dataframe = 
+# def get_data():
+#     tmp = MainDatabase("climate")
+#     tables = tmp.get_db_tables()
+#     dataframes = {}
+#
+#     for table in tables:
+#         table_name = table[0]
+#         quary = f"SELECT * from {table_name}"
+#         # dataframe =
+#
+#
+# class Webpage():
+#     def __init__(self, host, port) -> None:
+#         app = Dash(__name__)
+#
+#         app.layout = html.Div(
+#             [
+#                 html.Div(children="Temperature data"),
+#
+#             ]
+#         )
+#
+#         app.run(host='0.0.0.0', port=8050, debug=True)
+#
+#
+# Webpage()
+#
 
 
-class Webpage():
-    def __init__(self, host, port) -> None:
-        app = Dash(__name__)
-
-        app.layout = html.Div(
-            [
-                html.Div(children="Temperature data"),
-                
-            ]
-        )
-
-        app.run(host='0.0.0.0', port=8050, debug=True)
 
 
-Webpage()
+
+
 
 
 # import requests
