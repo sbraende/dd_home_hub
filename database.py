@@ -3,7 +3,7 @@ from datetime import datetime
 from pathlib import Path
 
 
-class Main():
+class MainDatabase():
     def __init__(self, db_name: str):
         self.name = db_name
         self.filename = f"{self.name}.db"
@@ -27,11 +27,20 @@ class Main():
         data_points = ", ".join(["?" for _ in data])
         data_values = list(data.values())
         self.cursor.execute(f"INSERT INTO {table_name} ({columns_names}) VALUES ({data_points})", data_values)
-        print(f"Writing data: {data_values}")
+        print(f"Table: {table_name}. Writing data: {data_values} ")
         self.connection.commit()
         # self.connection.close()
     
     def write_interior_data(self, raspberrys_instances: list):
         for raspberry in raspberrys_instances:
             self.write_data(raspberry.name, raspberry.get_data())
+    
+    def get_db_tables(self) -> list:
+        return self.connection.execute(f"SELECT name FROM sqlite_master WHERE type='table';").fetchall()
 
+
+    def read_column_names():
+        pass
+
+exterior_climate = MainDatabase("climate")
+exterior_climate.read_data()

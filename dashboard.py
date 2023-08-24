@@ -1,4 +1,15 @@
+import pandas
 from dash import Dash, html
+from database import MainDatabase 
+
+def get_data():
+    tables = MainDatabase.get_db_tables()
+    dataframes = {}
+
+    for table in tables:
+        table_name = table[0]
+        quary = f"SELECT * from {table_name}"
+        # dataframe = 
 
 
 class Webpage():
@@ -7,7 +18,8 @@ class Webpage():
 
         app.layout = html.Div(
             [
-                html.Div(children="Temperature data")
+                html.Div(children="Temperature data"),
+                
             ]
         )
 
