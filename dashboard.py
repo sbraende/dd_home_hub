@@ -3,7 +3,8 @@ from dash import Dash, html
 from database import MainDatabase 
 
 def get_data():
-    tables = MainDatabase.get_db_tables()
+    tmp = MainDatabase("climate")
+    tables = tmp.get_db_tables()
     dataframes = {}
 
     for table in tables:
