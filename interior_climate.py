@@ -6,7 +6,6 @@ import utilities
 class Setup():
     def __init__(self):
         self.config = utilities.HelperFunctions.open_config("config.json")
-        # self.table_names = ["raspberry01", "raspberry02"]  ## For each raspbeery get raspberry name
         self.raspberry_instances = self.get_raspberrys()
 
     def get_raspberrys(self) -> list:
