@@ -18,6 +18,10 @@ class Server():
             time.sleep(120)  # Set to no lower than 120 seconds
 
 
-if __name__ == '__main__':
+def main():
     main_database = Server()
     main_database.write_data()
+
+
+if __name__ == "__main__":
+    main()
