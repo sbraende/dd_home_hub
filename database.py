@@ -1,3 +1,4 @@
+import pandas as pd
 import sqlite3
 from datetime import datetime
 from pathlib import Path
@@ -38,9 +39,15 @@ class MainDatabase():
     def get_db_tables(self) -> list:
         return self.connection.execute(f"SELECT name FROM sqlite_master WHERE type='table';").fetchall()
 
+    def get_db_data(self) -> list:
+        tables = self.get_db_tables()
+        dataframes = {}
 
-    def read_column_names():
-        pass
+        for table in tables:
+            table_name = table[0]
+            quary = f"SELECT * from {table_name}"
+            dataframes[table_name] = pd.read_sql_query(quary, self.connection)
+        
+        return dataframes
 
-exterior_climate = MainDatabase("climate")
-exterior_climate.read_data()
+
