@@ -1,39 +1,79 @@
 import pandas as pd
 from dash import Dash, html, dcc
+from dash.dependencies import Input, Output
 import plotly.express as px
 import json
 
 from utilities import HelperFunctions
 from database import MainDatabase
 
+app = Dash(__name__)
 
-class DataPrep():
-    pass
+app.layout = html.Div([
+    dcc.Graph(id="data-graph"),
+    dcc.Interval(
+        id='interval-component',
+        interval=10000,  # in milliseconds
+        n_intervals=0
+    )
+])
+
+@app.callback(
+    Output("data-graph", "figure"),
+    Input("interval-component", "n_intervals") # add interval component
+)
+def update_graph(n):
+    climate_database = MainDatabase("climate")
+    dataframe = climate_database.get_db_data()
+
+    subplots = []
+
+    for table_name, df in dataframe.items():
+        subplot = {
+            "x": df["datetime"],
+            "y": df["temperature"],
+            "type": "line",
+            "name": f"Temperature - {table_name}"
+        }
+        subplots.append(subplot)
+
+    figure = {
+        "data": subplots, 
+        "layout": {
+            "title": "Temperature data",
+            "xaxis": {"title": "Data Time"},
+            "yaxis": {"title": "Value"}
+        }
+    }
+
+    return figure
+
+if __name__ == "__main__":
+    app.run_server(debug=True)
 
 
-class WebpApp():
-    def __init__(self) -> None:
-        self.config = HelperFunctions.open_config("config.json")
+
+# class WebpApp():
+#     def __init__(self) -> None:
+#         self.config = HelperFunctions.open_config("config.json")
         
-        # self.host = self.get_host()
-        # self.port = self.get_port()
+#         self.host = self.get_host()
+#         self.port = self.get_port()
 
-        # self.climate_database = MainDatabase("climate")  # Get this into the main app
-        # self.df = self.climate_database.get_db_data()    # Reference at top 
-        
-        # formatted_data = json.dumps(self.df, indent=4)
-        # print(formatted_data)
+#         self.climate_database = MainDatabase("climate")  # Get this into the main app
+#         self.df = self.climate_database.get_db_data()    # Reference at top 
 
-    # def get_host(self):
-    #     return self.config["website_api"]["host"]
+#         print(self.df)
 
-    # def get_port(self):
-    #     return self.config["website_api"]["port"]
+#     def get_host(self):
+#         return self.config["website_api"]["host"]
 
-    # def run(self):
-    #     self.app.run(host=self.host, port=int(self.port), debug=True)
+#     def get_port(self):
+#         return self.config["website_api"]["port"]
 
-        # self.app = Dash(__name__)
+#     def run(self):
+#         pass
+
 
         # self.app.layout = html.Div([
         #         html.Div(id="temperature-graph"),
@@ -60,10 +100,15 @@ class WebpApp():
 
 
 
-def main():
-    webpage = WebpApp()
-    # webpage.run()
+# self.app.run(host="0.0.0.0", port=8500, debug=True)
 
 
-if __name__ == "__main__":
-    main()
+
+
+# def main():
+#     webpage = WebpApp()
+#     webpage.run()
+
+
+# if __name__ == "__main__":
+#     main()
