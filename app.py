@@ -6,7 +6,7 @@ import interior_climate
 
 class Server():
     def __init__(self) -> None:
-        self.climate_database = database.MainDatabase("climate")
+        self.climate_database = database.ClimateDatabase("climate")
         self.exterior_instance = exterior_climate.OpenWeather()
         self.interior_instance = interior_climate.Setup()
 
