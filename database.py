@@ -4,7 +4,7 @@ from datetime import datetime
 from pathlib import Path
 
 
-class MainDatabase():
+class ClimateDatabase():
     def __init__(self, db_name: str):
         self.name = db_name
         self.filename = f"{self.name}.db"
@@ -18,9 +18,6 @@ class MainDatabase():
             self.cursor = self.connection.cursor()
         except sqlite3.Error as error:
             print(f"Error while initializing the database: {error}")
-    
-    # def make_table(self, table_name: str, data: dict):
-    #     columns_names = ", ".join(data.keys())
 
     def write_data(self, table_name: str, data: dict):
         columns_names = ", ".join(data.keys())
