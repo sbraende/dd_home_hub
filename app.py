@@ -15,7 +15,7 @@ class Server():
             self.climate_database.write_data(self.exterior_instance.table_name,
                                             self.exterior_instance.get_weather())
             self.climate_database.write_interior_data(self.interior_instance.raspberry_instances)
-            time.sleep(120)  # Set to no lower than 120 seconds
+            time.sleep(600)  # Set to no lower than 120 seconds
 
 
 def main():
